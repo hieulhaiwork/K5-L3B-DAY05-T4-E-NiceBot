@@ -363,9 +363,57 @@ Quyết định tách `thuc_hien_hoan_tien` ra và đặt **cần người duy�
 Hệ quả cho câu chữ ở §3 và nút trên prototype ở §5: AI **không được** nói "đã hoàn tiền" hay "sẽ được hoàn". AI chỉ được nói "đã gửi đề xuất hoàn tiền tới người bán, chờ người bán xác nhận trước [giờ]". Trên prototype, nút phía người mua là **"Gửi yêu cầu"**, không phải "Hoàn tiền ngay". Nút **"Đồng ý hoàn tiền"** chỉ có trên màn hình người bán và màn hình nhân viên.
 
 ## §5. Prototype  (chặng 5)
-- Link hoặc file · công cụ · phần nào mock · có lời gọi AI thật không.
-- 1–2 ảnh có đánh số; mỗi số: thể hiện gì · nguyên tắc HAX/PAIR nào · mức tự chủ nào.
-- Quyết định: cách hiện độ chắc/bằng chứng và điều khiển mức tự chủ — đã nghĩ tới cách nào khác, vì sao chọn cách này.
+[File demo](prototype/index.html)
+
+### 5.1 Thông tin kỹ thuật & Kiến trúc triển khai
+- File & Công cụ: Một file HTML duy nhất (index.html), xây dựng bằng HTML/CSS/Vanilla JavaScript thuần, chạy trực tiếp trên trình duyệt mà không cần backend hay đăng nhập.
+- Cấu trúc 2 màn hình:
+    - Màn hình bên trái (Phía Người mua — "Trò chuyện với Sàn"): Giao diện hội thoại giả lập app TMĐT, tích hợp thanh chọn nhanh 6 ca demo (Ca 1: Mô tả bị sửa sau bán, Ca 2: Người bán đúng, Ca 3: Đe doạ/đòi khoá shop/xin SĐT, Ca 4: Rủi ro sức khoẻ, Tin cụt, Hỏi quy trình), dải trạng thái chờ theo thời gian thực, các thẻ phản hồi phân tầng theo mức tự chủ và ô nhập tự do cho ca lạ của giảng viên/TA tại chỗ.
+    - Màn hình bên phải (Phía Người bán & Nhân viên sàn — chuyển đổi qua 2 tab):
+        - Tab Kênh người bán: Hiển thị thông tin khiếu nại đã ẩn liên hệ người mua (m***h), bảng đối chiếu mô tả lúc đặt vs. mô tả hiện tại, đồng hồ đếm ngược 48 giờ phản hồi và 3 nút thao tác (Xác nhận gửi nhầm / Đồng ý hoàn tiền, Gửi bằng chứng đối chứng, Giả lập hết 48 giờ).
+        - Tab Nhân viên sàn: Hiển thị hồ sơ chuyển tuyến, lý do chuyển, bản nháp soan_hoan_tien / de_xuat_tu_choi do AI soạn, danh sách điều kiện duyệt (luật hai bên) và các nút chốt giao dịch (Duyệt hoàn tiền, Duyệt đóng khiếu nại).
+- Phần Mock vs. Lời gọi AI thật (Bonus):
+    - Phần Mock: Dữ liệu 4 đơn hàng dựng (#SP2026-881 áo khoác bị sửa mô tả, #SP2026-904 nồi chiên 6L/5L, #SP2026-917 sữa bột, #SP2026-930 tai nghe) và bộ luật giả lập (ruleAnalyze) để bấm demo ổn định.
+    - Lời gọi AI thật: Tích hợp ô nhập API Key trên thanh công cụ (chỉ lưu tạm trong bộ nhớ trang lúc demo, không hardcode trong mã nguồn). Khi dán key Gemini (gemini-2.5-flash) hoặc OpenAI (gpt-4o-mini) và gõ ca lạ vào ô chat, hệ thống gọi API thật kèm System Prompt chứa dữ liệu đơn hàng dựng để phân tích JSON, sau đó vẫn đi qua hàm policy() khóa cứng ở giao diện nhằm đảm bảo AI thật không bao giờ vượt quyền.
+
+### 5.2 HAX/PAIR & Mức tự chủ
+
+1. [Image 1](prototype/demo-image-1.png)
+2. [Image 2](prototype/demo-image-2.png)
+3. [Image 3](prototype/demo-image-3.png)
+
+Hệ thống có sẵn công tắc **"Hiện số chú thích HAX/PAIR"** đánh số trực tiếp từ **`1` đến `11**` lên giao diện để đối chiếu:
+
+| STT | Vị trí trên giao diện | Thể hiện cái gì? | Nguyên tắc HAX / PAIR | Mức tự chủ (theo §4) |
+| --- | --- | --- | --- | --- |
+| **1** | Dải thông báo đầu khung chat người mua (`demo-image-1.png`) | Lời chào định danh rõ ràng: *"Bạn đang trò chuyện với **trợ lý AI**. Trợ lý không tự chuyển tiền, không đóng khiếu nại, không phạt shop."* | **HAX G1** (Make clear what the system can do) & Luật AI 134/2025 Đ11 | Khai báo ranh giới quyền hạn ngay từ đầu. |
+| **2** | Thẻ *"Nguồn sự thật & độ chắc"* trong bong bóng chat AI | Thanh đo phần trăm độ chắc kèm lý do (VD: `80% - Lệch mô tả lúc đặt, cần ảnh để xác nhận` hoặc `20% - Chưa đủ căn cứ`), trích nguyên văn **mô tả lúc đặt** và số ngày trả hàng còn lại.| **HAX G2** & **PAIR: Explainability & Trust** | Nền tảng dữ liệu đối chiếu (Snapshot). |
+| **3** | Mục *"Mô tả hiện tại"* gạch ngang + nút *"Luật đã áp dụng"* | Tô gạch ngang mô tả người bán đã sửa sau khi bán (`12/11/2026`), ghi rõ AI không dùng bản sửa này; cho phép mở xem danh sách luật hệ thống đã kích hoạt.| **HAX G11** (Make clear why the system did what it did) | Thực thi **Luật snapshot** (§4.4). |
+| **4** | Thẻ xanh dương `yeu_cau_bang_chung` trong chat | AI tự động gửi biểu mẫu xin đúng ảnh còn thiếu tới người mua, kèm 3 nút: *Gửi ảnh bằng chứng*, *Sửa yêu cầu*, *Huỷ yêu cầu (gửi tin đính chính)*.| **HAX G9** (Support efficient correction) | **Tự làm** (`yeu_cau_bang_chung`) — sai chỉ phiền, sửa được bằng tin đính chính.|
+| **5** | Thẻ vàng `thuc_hien_hoan_tien` / `tu_choi_khieu_nai` trong chat | Khẳng định AI **không tự chuyển tiền / không tự đóng khiếu nại**; nêu rõ tiền chỉ đi khi người bán đồng ý hoặc nhân viên duyệt (kèm nút *Rút khiếu nại* để người mua tự rút).| **HAX G10** (Scope services when in doubt) | **Cần người duyệt** — khóa thao tác tài chính bất khả nghịch trên AI.|
+| **6** | Thẻ đỏ *"CẤM: NGOÀI THẨM QUYỀN CỦA AI"* (khi chạy Ca 3) | Khóa cứng yêu cầu *khoá/phạt shop* và *xin SĐT người bán*; giải thích rõ không có nút thực hiện ở bất kỳ màn hình nào và chuyển hồ sơ cho trưởng nhóm.| **HAX G1** (Ranh giới năng lực hệ thống) | **Cấm** (`phat_shop`) & bảo vệ PII (§1.4, §4.2).|
+| **7** | Thẻ hồng *"ƯU TIÊN AN TOÀN"* (Ca 4) & thẻ đỏ *"TOOL LỖI"* | Ở Ca 4 (bé đau bụng vì sữa), thẻ khuyên đi khám đứng trước mọi biểu mẫu; khi bật checkbox *"Giả lập tool lỗi"*, thẻ báo lỗi thật và hiện nút *Thử lại* + số tổng đài `1900 0000`.| **PAIR: Errors & Graceful Failure** | Thực thi **Luật sức khoẻ** & xử lý lỗi chuyển tuyến an toàn.|
+| **8** | Thanh nút dưới phản hồi AI (*Gặp nhân viên*, *Sửa thông tin khiếu nại*) | Cho phép người mua chủ động thoát luồng tự động để gặp người thật hoặc sửa lại đơn/lý do khiếu nại bất kỳ lúc nào.| **HAX G8** (Support efficient dismissal) & **HAX G9** | Quyền kiểm soát thuộc về người dùng. |
+| **9** | Dải trạng thái màu xanh trên đầu chat (`demo-image-2.png`)| Hiển thị trạng thái động: *"Đang chờ: **người bán** phản hồi, còn **47:59:14**. Hạn trả hàng: **tạm dừng**, còn 12 ngày"*.| **HAX G2** & Lời hứa với người mua (§4.6) | Minh bạch tiến độ và bảo vệ thời hạn trả hàng.|
+| **10** | Khung hành động bên tab **Kênh người bán** (`demo-image-2.png`)| Người bán xem khiếu nại, đếm ngược **48 giờ** và tự bấm *"Xác nhận gửi nhầm / Đồng ý hoàn tiền"* hoặc *"Gửi bằng chứng đối chứng"* (hết 48h không tự trừ tiền mà chuyển nhân viên).| Lời hứa với người bán (§4.6) & **PAIR: Fairness** | **Cần người duyệt** — bên chịu thiệt (người bán) tự bấm đồng ý.|
+| **11** | Bảng *"Điều kiện duyệt (luật hai bên)"* bên tab **Nhân viên sàn** (`demo-image-3.png`)| Hiển thị bản nháp `soan_hoan_tien` (AI soạn). Các nút *Duyệt hoàn tiền* / *Duyệt đóng khiếu nại* bị **vô hiệu hoá (disabled)** cho tới khi tích đủ 2 điều kiện: đã xin bằng chứng người mua & đã nghe người bán. Không tồn tại nút phạt shop.| **Human-in-the-loop** & **Luật hai bên** (§4.4) | **Tự làm (chỉ soạn)** + **Cần người duyệt (chốt tiền)** + **Cấm (`phat_shop`)**.|
+
+### 5.3 Quyết định thiết kế: Độ chắc, Bằng chứng & Điều khiển mức tự chủ
+
+1. **Cách thể hiện độ chắc và bằng chứng (Thẻ "Nguồn sự thật" tách biệt khỏi lời thoại):**
+* *Cách khác đã nghĩ tới:* Gộp toàn bộ thông tin đối chiếu mô tả sản phẩm và lý do chưa chắc chắn vào một đoạn văn trả lời thông thường của chatbot.
+* *Vì sao không chọn:* Người mua đang bức xúc thường bỏ qua đoạn văn dài, dễ hiểu nhầm AI đang vòng vo hoặc bênh vực người bán.
+* *Vì sao chọn cách này:* Tách riêng **Thẻ Nguồn sự thật (`2`, `3`)** với thanh tiến độ phần trăm độ chắc, trích dẫn nguyên văn mô tả lúc đặt và gạch ngang phần mô tả bị sửa giúp người mua thấy ngay bằng chứng khách quan, đồng thời hiểu rõ vì sao AI chưa thể chốt hoàn tiền ngay lập tức.
+
+2. **Cách điều khiển mức tự chủ (Khóa cứng bằng luật giao diện & Phân vai 3 bên trên cùng một màn hình):**
+* *Cách khác đã nghĩ tới:* Tin tưởng hoàn toàn vào System Prompt để ngăn AI gọi các tool nguy hiểm (`thuc_hien_hoan_tien`, `phat_shop`), hoặc tách làm 3 ứng dụng riêng biệt cho Người mua, Người bán và Nhân viên.
+* *Vì sao không chọn:* Với LLM thật, prompt không thể đảm bảo 100% model không bị thao túng bởi tin nhắn giận dữ (prompt injection / cảm xúc); trong khi tách 3 app riêng sẽ làm đứt mạch theo dõi khi demo 4 phút.
+* *Vì sao chọn cách này:*
+* **Về kỹ thuật:** Thiết kế lớp `policy()` độc lập ở tầng giao diện — ngay cả khi model AI thật đề xuất `phat_shop` hay `thuc_hien_hoan_tien`, giao diện vẫn chặn lại, ghi log vào mục *"Luật đã áp dụng"* và chỉ hiển thị bản nháp hoặc thẻ từ chối.
+
+
+* **Về trải nghiệm:** Đặt màn hình Người mua cạnh 2 tab Kênh người bán / Nhân viên sàn giúp người xem kiểm chứng trực tiếp tính trung lập: nút *Đồng ý hoàn tiền* chỉ xuất hiện ở màn hình của bên chịu thiệt (người bán) hoặc nhân viên sau khi đủ điều kiện hai bên.
+
 
 ## §6. Tốt là gì  (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
 - 3 tiêu chí Pass/Fail chấm được; thiết kế của nhóm đạt tiêu chí nào trên 2 kịch bản đắt nhất; lỗi còn lại.
@@ -419,4 +467,4 @@ Hệ quả cho câu chữ ở §3 và nút trên prototype ở §5: AI **không 
     + Các tiêu chí TC1–TC3 hiện mới được chấm dựa trên thiết kế. Cần thử trên prototype để xác nhận cảnh báo xuất hiện đúng thứ tự, các hành động bị cấm thực sự không thể thực hiện và trạng thái chuyển hồ sơ không bị hiển thị sai.
     + Kết luận: Thiết kế hiện đạt 5/6 lượt kiểm tra trên tài liệu. Nhóm cần sửa luồng UX của KB4 và kiểm thử prototype trước khi kết luận sản phẩm đáp ứng đủ ba tiêu chí phát hành.
 ## §7. Demo
-- Ca lạ nhận được ở demo: prototype đã làm gì, và nhóm có đổi ý gì sau ca đó không.
+
