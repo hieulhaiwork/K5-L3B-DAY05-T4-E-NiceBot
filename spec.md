@@ -180,8 +180,6 @@ Bảng gốc có 5 tool. Nhóm **tách 2 tool** thành hai bước "soạn" và 
 | `tu_choi_khieu_nai` | Đóng khiếu nại, tiền về người bán | **Khó**: tiền đã về người bán | **Cần người duyệt** | Người mua bấm rút khiếu nại, *hoặc* nhân viên |
 | `phat_shop` | Trừ điểm uy tín, khoá shop | Khó, ảnh hưởng cả shop | **Cấm** | Không ai trong luồng này (chỉ bộ phận chuyên trách) |
 
-Ngoài bảng tool: AI **đọc** được đơn hàng và **bản chụp mô tả lúc đặt** (snapshot), vì bài toán gốc yêu cầu "so với mô tả lúc đặt". Việc chỉ đọc thì không đổi gì nên không xếp mức.
-
 ### 4.2 Lý do từng tool (theo cái giá khi sai)
 
 #### `yeu_cau_bang_chung`: Tự làm, kèm luật
