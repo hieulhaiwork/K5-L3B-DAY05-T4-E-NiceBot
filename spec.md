@@ -64,6 +64,103 @@ Với mỗi kịch bản đắt nhất:
 - 2–3 nguyên tắc HAX/PAIR, mỗi cái trỏ vào một chỗ cụ thể (câu chữ hoặc chỗ trên màn hình).
 - Lỗi nào sửa câu chữ không cứu được (nếu có), và thiết kế cứu nó thế nào.
 
+
+
+Kịch bản 1: #4 “Shop làm ăn vớ vẩn, hàng nhái còn đe dọa tìm người đến đánh t. Hoàn tiền cho t và khóa mẹ shop đi” 
+- AI nói gì: "Mình hiểu bạn đang rất không hài lòng với sản phẩm đã nhận và muốn được giải quyết sớm. Hiện tại, mình chưa có đủ thông tin và bằng chứng để xác định sản phẩm không đúng mô tả. Vì vậy, mình chưa thể kết luận hoàn tiền hoặc xử phạt shop. Bạn vui lòng cho biết đơn hàng cần khiếu nại và sản phẩm khác mô tả ở điểm nào. Bạn có thể bổ sung hình ảnh hoặc thông tin liên quan để hồ sơ được xem xét. Nếu bạn chưa có bằng chứng, mình vẫn có thể hướng dẫn bạn tiếp tục khiếu nại hoặc đề xuất chuyển nhân viên hỗ trợ."
+- Người dùng thấy gì: 
+    + Nhãn: "Chưa đủ căn cứ kết luận".
+    + Thông báo: "Chưa thực hiện hoàn tiền hoặc xử phạt shop".
+    + Trường chọn/nhập đơn hàng cần khiếu nại.
+    + Trường mô tả sản phẩm khác thông tin đặt hàng ở điểm nào.
+    + Trường mô tả sản phẩm khác thông tin đặt hàng ở điểm nào.
+    + Nút "Bổ sung bằng chứng".
+    + Lựa chọn "Tôi chưa có bằng chứng".
+    + Nút "Yêu cầu nhân viên xem xét" khi không thể bổ sung hoặc không đồng ý với hướng xử lý.
+- Người dùng làm gì tiếp
+    + Xác định đơn hàng và mô tả cụ thể điểm không đúng.
+    + Cung cấp bằng chứng nếu có, theo yêu cầu được gửi qua yeu_cau_bang_chung.
+    + Nếu không có bằng chứng, vẫn có thể mô tả vấn đề và yêu cầu nhân viên xem xét.
+    + Có thể sửa thông tin đã cung cấp nếu AI hiểu sai.
+    + Nếu có bằng chứng mâu thuẫn, AI không tự xử thua một bên mà chuyển người xem xét.
+- Ai được báo, sau bao lâu:
+    + Người mua: Nhận yêu cầu bổ sung và kết quả gửi yêu cầu ngay khi thao tác hoàn tất. Giao diện không được báo thành công nếu tool thất bại.
+    + Người bán: Chưa bị xử phạt hoặc kết luận có lỗi. Khi cần phản hồi, hệ thống sử dụng yeu_cau_bang_chung để gửi yêu cầu tới người bán; chỉ xác nhận đã gửi khi tool thành công.
+    + Trưởng nhóm: Nhận hồ sơ khi AI gọi chuyen_truong_nhom thành công trong trường hợp tranh chấp chưa thể làm rõ.
+- Quyết định xử lý: 
+    + Chọn: Hỏi lại thông tin còn thiếu và yêu cầu bằng chứng.
+    + Lý do chọn:
+        * Người mua chưa xác định rõ đơn hàng, điểm không đúng mô tả và chưa đưa ra bằng chứng.
+        * Những thông tin này có thể được người mua bổ sung mà chưa cần chuyển nhân viên ngay.
+        * Lời đe dọa bóc phốt không chứng minh người bán vi phạm và không thể là căn cứ hoàn tiền hoặc xử phạt.
+    + Phương án đã loại:
+        * Chỉ trả lời kèm giới hạn: Nói rằng AI chưa đủ căn cứ nhưng không yêu cầu thông tin cụ thể sẽ không giúp người mua tiến thêm bước nào.
+        * Dừng và chuyển người ngay: Có thể tăng tải nhân viên không cần thiết khi vấn đề ban đầu chỉ là thiếu thông tin đơn giản.
+- Loại lỗi và cách sửa
+    + Loại lỗi chính: Lỗi hệ thống (System Error).
+    + Nếu AI vì muốn xoa dịu người mua hoặc tránh bị bóc phốt mà gọi soan_hoan_tien và phat_shop, lỗi nằm ở cơ chế ra quyết định: hệ thống sử dụng áp lực cảm xúc thay cho bằng chứng.
+    + Việc người mua tức giận hoặc đe dọa không phải lý do để từ chối quyền khiếu nại, nhưng cũng không phải căn cứ để xử phạt shop.
+    + Cách nói: AI giữ thái độ trung lập, ghi nhận sự không hài lòng nhưng không hứa hoàn tiền hay xử phạt. Thay vì trách người dùng không đưa bằng chứng, AI giải thích cần thông tin gì và vì sao.
+    + Cách sửa: Yêu cầu đúng thông tin còn thiếu, cho phép bổ sung hoặc chuyển người, đồng thời kiểm soát quyền gọi các tool gây thiệt hại.
+- Nguyên tắc HAX/PAIR áp dụng
+    + G10 – Thu hẹp phạm vi khi nghi ngờ: Câu "mình chưa thể kết luận hoàn tiền hoặc xử phạt shop" và trạng thái "Chưa thực hiện hoàn tiền hoặc xử phạt". AI chỉ hướng dẫn và yêu cầu bằng chứng ở bước này.
+    + G11 – Giải thích vì sao: Nhãn "Chưa đủ căn cứ kết luận", kèm trường thông tin đơn hàng, điểm sai và bằng chứng còn thiếu.
+    + G9 – Sửa dễ dàng: Nút "Sửa thông tin khiếu nại" cho phép người dùng chỉnh sửa mã đơn hàng, lý do khiếu nại hoặc thông tin AI đã hiểu sai. Sau khi chỉnh sửa, AI phải cập nhật lại nhận định dựa trên thông tin mới, không tiếp tục sử dụng dữ liệu sai trước đó.
+- Lỗi không thể sửa chỉ bằng câu chữ
+    + Nếu AI tự gọi soan_hoan_tien và phat_shop do bị người mua gây áp lực, việc nói xin lỗi sau đó không thể dễ dàng khôi phục tiền, điểm uy tín hoặc hoạt động kinh doanh của shop.
+    + Giải pháp thiết kế:
+        * Không cho lời đe dọa hoặc mức độ tức giận trở thành căn cứ quyết định.
+        * Chặn việc thực hiện soan_hoan_tien khi chưa có căn cứ và phê duyệt phù hợp.
+        * Không cho AI tự sử dụng phat_shop trong luồng khiếu nại thông thường; chuyển bộ phận có thẩm quyền xem xét.
+        * Không tự gọi tu_choi_khieu_nai chỉ vì khách thiếu bằng chứng.
+        * Cho người dùng bổ sung thông tin hoặc chuyển người khi không thể xác minh, thay vì tự động xử thắng hoặc thua một bên.
+
+
+Kịch bản 2: “Mình mua hộp sữa bột cho con uống mà mở ra thấy vón cục, có mùi chua. Con mình uống thử một ngụm giờ đang đau bụng. Hoàn tiền gấp!”
+- AI nói gì: "Mình rất tiếc khi biết bé đang bị đau bụng sau khi uống sữa có dấu hiệu bất thường. Bạn nên ngừng cho bé sử dụng sản phẩm này và liên hệ cơ sở y tế để được tư vấn, kiểm tra sớm. Nếu bé có biểu hiện nghiêm trọng, hãy đưa bé đi cấp cứu ngay. Mình chưa thể xác định nguyên nhân đau bụng hoặc kết luận sản phẩm có vấn đề chỉ từ thông tin hiện tại.
+Mình sẽ ưu tiên chuyển khiếu nại này cho bộ phận phụ trách xem xét. Bạn không cần chờ hoàn tất thủ tục khiếu nại mới tìm kiếm hỗ trợ y tế."
+- Người dùng thấy gì: 
+    + Cảnh báo nổi bật: "Ưu tiên an toàn sức khỏe của bé".
+    + Hướng dẫn liên hệ cơ sở y tế, không chờ quy trình hoàn tiền.
+    + Thông báo: "Chưa xác minh nguyên nhân và chất lượng sản phẩm".
+    + Trạng thái chuyển hồ sơ khiếu nại.
+    + Nút "Bổ sung thông tin sản phẩm" để thực hiện sau khi đã ưu tiên sức khỏe.
+- Người dùng làm gì tiếp:
+    + Ngừng sử dụng sản phẩm nghi có vấn đề và tìm kiếm hỗ trợ y tế.
+    + Theo dõi kết quả chuyển hồ sơ.
+    + Bổ sung ảnh sản phẩm, hạn sử dụng, bao bì hoặc thông tin đơn hàng khi phù hợp, không phải điều kiện để nhận cảnh báo sức khỏe.
+- Ai được báo, sau bao lâu:
+    + Người mua: Nhận cảnh báo sức khỏe ngay khi AI nhận diện tình huống.
+    + Trưởng nhóm: Nhận hồ sơ ngay khi chuyen_truong_nhom thực hiện thành công.
+    + Người bán: Được yêu cầu cung cấp thông tin về sản phẩm qua quy trình xử lý tiếp theo, không tự kết luận đã bán hàng kém chất lượng.
+- Quyết định xử lý: 
+    + Chọn: Dừng luồng khiếu nại thông thường để đưa ra cảnh báo an toàn và chuyển người xử lý.
+    + Lý do chọn: Tình huống có dấu hiệu liên quan sức khỏe trẻ nhỏ. Nếu AI chỉ yêu cầu bằng chứng và cho khách chờ xử lý hoàn tiền, việc chăm sóc sức khỏe có thể bị trì hoãn.
+    + Phương án loại bỏ:
+        * Chỉ hỏi thêm bằng chứng: Không phù hợp làm bước đầu vì có thể khiến người mua ưu tiên chụp ảnh thay vì chú ý tình trạng của bé.
+        * Chỉ trả lời kèm giới hạn: Có thể cảnh báo sức khỏe nhưng không bảo đảm khiếu nại được chuyển tới người có thẩm quyền xem xét.
+        * Việc chuyển trưởng nhóm chỉ giải quyết phần khiếu nại thương mại, không thay thế chăm sóc y tế.
+- Loại lỗi và cách sửa
+    + Loại lỗi chính: Lỗi ngữ cảnh.
+    + AI có thể thực hiện đúng quy trình khiếu nại thông thường nhưng không nhận ra tình huống này còn liên quan đến sức khỏe trẻ nhỏ.
+    + Nếu hệ thống vẫn bắt buộc khách hoàn tất quy trình gửi bằng chứng trước khi đưa ra cảnh báo, đó là lỗi thiết kế hệ thống.
+    + Cách nói: Thể hiện sự quan tâm, ưu tiên hướng dẫn an toàn, không đưa ra chẩn đoán hoặc khẳng định sữa là nguyên nhân gây đau bụng.
+    + Cách sửa: Thiết kế luồng ưu tiên khi phát hiện thông tin liên quan nguy cơ sức khỏe, đồng thời chuyển hồ sơ khiếu nại cho người phụ trách.
+- Nguyên tắc HAX/PAIR
+    + G10 – Thu hẹp phạm vi khi nghi ngờ: AI không tự kết luận sữa gây ngộ độc hay quyết định hoàn tiền; chỉ cung cấp hướng dẫn an toàn và chuyển hồ sơ.
+    + G11 – Giải thích vì sao: Câu "Mình chưa thể xác định nguyên nhân đau bụng hoặc kết luận sản phẩm có vấn đề" giúp người dùng hiểu giới hạn của AI.
+    + PAIR – Graceful Failure: Khi luồng khiếu nại thông thường không phù hợp, hệ thống có đường xử lý ưu tiên sức khỏe thay vì yêu cầu bổ sung ảnh trước.
+- Lỗi không thể sửa chỉ bằng câu chữ
+    + Nếu giao diện bắt buộc người dùng gửi ảnh và chờ phản hồi trước khi tiếp cận hướng dẫn an toàn, việc AI nói lời xin lỗi hoặc dùng ngôn ngữ quan tâm hơn vẫn không giải quyết được lỗi thiết kế.
+    + Giải pháp:
+        * Phát hiện dấu hiệu rủi ro sức khỏe trong tin nhắn.
+        * Hiển thị cảnh báo an toàn trước biểu mẫu khiếu nại.
+        * Không buộc người dùng gửi bằng chứng trước khi tìm hỗ trợ y tế.
+        * Ưu tiên gọi chuyen_truong_nhom để xử lý khiếu nại.
+        * Chỉ hiển thị "Đã chuyển hồ sơ" khi tool trả về thành công; nếu thất bại, hiển thị hướng liên hệ hỗ trợ khác.
+
+
+
 ## §4. Mức tự chủ  (chặng 4)
 ### 4.0 Nguyên tắc chung nhóm dùng để xếp mức
 
