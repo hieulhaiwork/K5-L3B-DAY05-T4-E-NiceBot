@@ -14,7 +14,7 @@ Bài nộp cần **danh sách thành viên** và **mỗi người làm gì**. Nh
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
 |Lê Hiền Hiếu  |2A201603940  | Tạo 8 kịch bản rủi ro và 2 kịch bản đắt nhất |
-|  |  |  |
+| Trần Tùng Lâm | 2A202603893 | Xếp mức cho từng tool, thử mức trên 3 kịch bản và viết luật thêm |
 |  |  |  |
 
 ## §1. Lát cắt & phạm vi
