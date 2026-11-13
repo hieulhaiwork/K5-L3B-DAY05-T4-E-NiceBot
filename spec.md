@@ -93,16 +93,15 @@ Với mỗi kịch bản đắt nhất:
 
 
 Kịch bản 1: #4 “Shop làm ăn vớ vẩn, hàng nhái còn đe dọa tìm người đến đánh t. Hoàn tiền cho t và khóa mẹ shop đi” 
-- AI nói gì: "Mình hiểu bạn đang rất không hài lòng với sản phẩm đã nhận và muốn được giải quyết sớm. Hiện tại, mình chưa có đủ thông tin và bằng chứng để xác định sản phẩm không đúng mô tả. Vì vậy, mình chưa thể kết luận hoàn tiền hoặc xử phạt shop. Bạn vui lòng cho biết đơn hàng cần khiếu nại và sản phẩm khác mô tả ở điểm nào. Bạn có thể bổ sung hình ảnh hoặc thông tin liên quan để hồ sơ được xem xét. Nếu bạn chưa có bằng chứng, mình vẫn có thể hướng dẫn bạn tiếp tục khiếu nại hoặc đề xuất chuyển nhân viên hỗ trợ."
+- AI nói gì: "Mình đã ghi nhận phản ánh của bạn về sản phẩm nghi là hàng nhái và thông tin bạn bị shop đe dọa hành hung. Mình ưu tiên sự an toàn của bạn trước. Nếu bạn cảm thấy đang gặp nguy hiểm, hãy đến nơi an toàn và liên hệ cơ quan chức năng hoặc người có thể hỗ trợ ngay. Hiện tại, mình chưa có đủ bằng chứng để xác minh hành vi vi phạm của shop, nên chưa thể kết luận hoàn tiền hoặc xử phạt shop. Tuy nhiên, vì khiếu nại có dấu hiệu đe dọa an toàn thân thể, mình sẽ ưu tiên chuyển hồ sơ cho nhân viên xem xét ngay, không yêu cầu bạn phải hoàn tất việc cung cấp bằng chứng trước. Bạn có thể bổ sung hình ảnh sản phẩm hoặc nội dung tin nhắn đe dọa sau khi đã bảo đảm an toàn."
 - Người dùng thấy gì: 
-    + Nhãn: "Chưa đủ căn cứ kết luận".
-    + Thông báo: "Chưa thực hiện hoàn tiền hoặc xử phạt shop".
-    + Trường chọn/nhập đơn hàng cần khiếu nại.
-    + Trường mô tả sản phẩm khác thông tin đặt hàng ở điểm nào.
-    + Trường mô tả sản phẩm khác thông tin đặt hàng ở điểm nào.
-    + Nút "Bổ sung bằng chứng".
-    + Lựa chọn "Tôi chưa có bằng chứng".
-    + Nút "Yêu cầu nhân viên xem xét" khi không thể bổ sung hoặc không đồng ý với hướng xử lý.
+    + Cảnh báo ưu tiên: "Có dấu hiệu đe dọa an toàn – Hãy ưu tiên bảo vệ bản thân".
+    + Hướng dẫn tìm nơi an toàn và liên hệ cơ quan chức năng khi cần thiết.
+    + Nhãn: "Khiếu nại cần được ưu tiên xem xét".
+    + Thông báo: "Chưa đủ căn cứ kết luận shop vi phạm".
+    + Trạng thái chuyển hồ sơ: "Đang chuyển" / "Đã chuyển" / "Chuyển thất bại".
+    + Nút "Bổ sung bằng chứng" để thực hiện sau khi đã ưu tiên an toàn.
+    + Nút "Sửa thông tin khiếu nại".
 - Người dùng làm gì tiếp
     + Xác định đơn hàng và mô tả cụ thể điểm không đúng.
     + Cung cấp bằng chứng nếu có, theo yêu cầu được gửi qua yeu_cau_bang_chung.
@@ -110,37 +109,38 @@ Kịch bản 1: #4 “Shop làm ăn vớ vẩn, hàng nhái còn đe dọa tìm 
     + Có thể sửa thông tin đã cung cấp nếu AI hiểu sai.
     + Nếu có bằng chứng mâu thuẫn, AI không tự xử thua một bên mà chuyển người xem xét.
 - Ai được báo, sau bao lâu:
-    + Người mua: Nhận yêu cầu bổ sung và kết quả gửi yêu cầu ngay khi thao tác hoàn tất. Giao diện không được báo thành công nếu tool thất bại.
-    + Người bán: Chưa bị xử phạt hoặc kết luận có lỗi. Khi cần phản hồi, hệ thống sử dụng yeu_cau_bang_chung để gửi yêu cầu tới người bán; chỉ xác nhận đã gửi khi tool thành công.
-    + Trưởng nhóm: Nhận hồ sơ khi AI gọi chuyen_truong_nhom thành công trong trường hợp tranh chấp chưa thể làm rõ.
+    + Người mua: Nhận cảnh báo an toàn ngay khi AI phát hiện dấu hiệu đe dọa. Kết quả chuyển hồ sơ được thông báo ngay khi tool trả kết quả.
+    + Trưởng nhóm: Nhận hồ sơ ưu tiên cao khi chuyen_truong_nhom thực hiện thành công, kèm thông tin về nguy cơ bạo lực và nội dung khiếu nại.
+    + Người bán: Không được AI tự động liên hệ về cáo buộc đe dọa. Việc liên hệ và xác minh do nhân viên có thẩm quyền thực hiện, nhằm tránh nguy cơ làm tình huống leo thang.
 - Quyết định xử lý: 
     + Chọn: Hỏi lại thông tin còn thiếu và yêu cầu bằng chứng.
     + Lý do chọn:
-        * Người mua chưa xác định rõ đơn hàng, điểm không đúng mô tả và chưa đưa ra bằng chứng.
-        * Những thông tin này có thể được người mua bổ sung mà chưa cần chuyển nhân viên ngay.
-        * Lời đe dọa bóc phốt không chứng minh người bán vi phạm và không thể là căn cứ hoàn tiền hoặc xử phạt.
+        * Tin nhắn chứa dấu hiệu đe dọa an toàn thân thể, có thể gây thiệt hại nghiêm trọng hơn tranh chấp tài chính.
+        * Nếu AI chỉ yêu cầu bằng chứng và chờ phản hồi, người mua có thể không được hướng dẫn bảo vệ bản thân kịp thời.
+        * chuyen_truong_nhom là tool có thể chuyển hồ sơ và có khả năng đảo ngược, phù hợp để ưu tiên xử lý trường hợp phức tạp.
+        * Việc chuyển hồ sơ không đồng nghĩa với xác nhận shop có hành vi đe dọa hoặc vi phạm.
     + Phương án đã loại:
-        * Chỉ trả lời kèm giới hạn: Nói rằng AI chưa đủ căn cứ nhưng không yêu cầu thông tin cụ thể sẽ không giúp người mua tiến thêm bước nào.
-        * Dừng và chuyển người ngay: Có thể tăng tải nhân viên không cần thiết khi vấn đề ban đầu chỉ là thiếu thông tin đơn giản.
+        * Hỏi lại và yêu cầu bằng chứng trước: Có thể khiến người mua tập trung tìm ảnh, tin nhắn thay vì chú ý nguy cơ an toàn. Bằng chứng được bổ sung sau.
+        * Chỉ trả lời kèm giới hạn: AI có thể đưa ra cảnh báo, nhưng nếu không chuyển hồ sơ thì nguy cơ được phản ánh chưa đến bộ phận xử lý khiếu nại.
 - Loại lỗi và cách sửa
-    + Loại lỗi chính: Lỗi hệ thống (System Error).
-    + Nếu AI vì muốn xoa dịu người mua hoặc tránh bị bóc phốt mà gọi soan_hoan_tien và phat_shop, lỗi nằm ở cơ chế ra quyết định: hệ thống sử dụng áp lực cảm xúc thay cho bằng chứng.
-    + Việc người mua tức giận hoặc đe dọa không phải lý do để từ chối quyền khiếu nại, nhưng cũng không phải căn cứ để xử phạt shop.
-    + Cách nói: AI giữ thái độ trung lập, ghi nhận sự không hài lòng nhưng không hứa hoàn tiền hay xử phạt. Thay vì trách người dùng không đưa bằng chứng, AI giải thích cần thông tin gì và vì sao.
-    + Cách sửa: Yêu cầu đúng thông tin còn thiếu, cho phép bổ sung hoặc chuyển người, đồng thời kiểm soát quyền gọi các tool gây thiệt hại.
+    + Loại lỗi chính: Lỗi ngữ cảnh (Context Error).
+    + AI có thể thực hiện đúng quy trình khiếu nại thông thường nhưng không nhận ra tin nhắn còn chứa dấu hiệu đe dọa bạo lực, khiến thứ tự ưu tiên xử lý không phù hợp với tình huống.
+    + Nếu hệ thống vẫn bắt buộc người dùng cung cấp bằng chứng trước khi cảnh báo và chuyển người, đây cũng là lỗi thiết kế hệ thống.
+    + Cách nói: AI ghi nhận nguy cơ mà không mặc định cáo buộc là sự thật. Đặt hướng dẫn an toàn trước nội dung hoàn tiền và xử phạt. Không hứa có thể bảo vệ người dùng hoặc tự xử phạt shop.
+    + Cách sửa: Thiết kế luồng ưu tiên khi phát hiện dấu hiệu đe dọa an toàn, tự gọi chuyen_truong_nhom ở mức ưu tiên cao và không yêu cầu hoàn tất biểu mẫu bằng chứng trước khi chuyển hồ sơ.
 - Nguyên tắc HAX/PAIR áp dụng
-    + G10 – Thu hẹp phạm vi khi nghi ngờ: Câu "mình chưa thể kết luận hoàn tiền hoặc xử phạt shop" và trạng thái "Chưa thực hiện hoàn tiền hoặc xử phạt". AI chỉ hướng dẫn và yêu cầu bằng chứng ở bước này.
-    + G11 – Giải thích vì sao: Nhãn "Chưa đủ căn cứ kết luận", kèm trường thông tin đơn hàng, điểm sai và bằng chứng còn thiếu.
-    + G9 – Sửa dễ dàng: Nút "Sửa thông tin khiếu nại" cho phép người dùng chỉnh sửa mã đơn hàng, lý do khiếu nại hoặc thông tin AI đã hiểu sai. Sau khi chỉnh sửa, AI phải cập nhật lại nhận định dựa trên thông tin mới, không tiếp tục sử dụng dữ liệu sai trước đó.
+    + G10 - Thu hẹp phạm vi khi nghi ngờ: AI không tự kết luận shop vi phạm, không gọi soan_hoan_tien để chuyển tiền hoặc phat_shop. Thay vào đó, ưu tiên cảnh báo an toàn và chuyển hồ sơ cho người có thẩm quyền.
+    + G11 - Giải thích vì sao: Câu "vì khiếu nại có dấu hiệu đe dọa an toàn thân thể, mình sẽ ưu tiên chuyển hồ sơ" giải thích lý do hệ thống chuyển khỏi quy trình thông thường.
+    + PAIR - Graceful Failure: Giao diện có cảnh báo an toàn và trạng thái chuyển hồ sơ. Nếu chuyen_truong_nhom thất bại, AI thông báo rõ chưa chuyển thành công, cung cấp cách liên hệ hỗ trợ khác, đồng thời giữ nguyên hướng dẫn bảo vệ an toàn.
 - Lỗi không thể sửa chỉ bằng câu chữ
-    + Nếu AI tự gọi soan_hoan_tien và phat_shop do bị người mua gây áp lực, việc nói xin lỗi sau đó không thể dễ dàng khôi phục tiền, điểm uy tín hoặc hoạt động kinh doanh của shop.
+    + Nếu hệ thống chỉ thay lời phản hồi thành câu thể hiện sự quan tâm nhưng vẫn bắt người mua gửi bằng chứng trước khi chuyển hồ sơ, nguy cơ an toàn vẫn không được ưu tiên xử lý. Ngoài ra, nếu AI tự hoàn tiền và khóa shop chỉ dựa trên lời cáo buộc, một lời xin lỗi không thể dễ dàng khôi phục thiệt hại tài chính và uy tín người bán.
     + Giải pháp thiết kế:
-        * Không cho lời đe dọa hoặc mức độ tức giận trở thành căn cứ quyết định.
-        * Chặn việc thực hiện soan_hoan_tien khi chưa có căn cứ và phê duyệt phù hợp.
-        * Không cho AI tự sử dụng phat_shop trong luồng khiếu nại thông thường; chuyển bộ phận có thẩm quyền xem xét.
-        * Không tự gọi tu_choi_khieu_nai chỉ vì khách thiếu bằng chứng.
-        * Cho người dùng bổ sung thông tin hoặc chuyển người khi không thể xác minh, thay vì tự động xử thắng hoặc thua một bên.
-
+        * Phát hiện nội dung có dấu hiệu đe dọa bạo lực trong tin nhắn.
+        * Ưu tiên hiển thị cảnh báo an toàn trước biểu mẫu khiếu nại.
+        * Tự gọi chuyen_truong_nhom ở mức ưu tiên cao, không cần đợi người dùng bổ sung bằng chứng.
+        * Không tự gửi yêu cầu bằng chứng cho người bán bị tố đe dọa; việc liên hệ do nhân viên thực hiện.
+        * Chặn hành động hoàn tiền, đóng khiếu nại hoặc xử phạt shop khi chưa qua cơ chế xác minh và phê duyệt phù hợp.
+        * Chỉ xác nhận đã chuyển hồ sơ khi tool thành công; nếu thất bại, hiển thị phương án liên hệ hỗ trợ khác.
 
 Kịch bản 2: “Mình mua hộp sữa bột cho con uống mà mở ra thấy vón cục, có mùi chua. Con mình uống thử một ngụm giờ đang đau bụng. Hoàn tiền gấp!”
 - AI nói gì: "Mình rất tiếc khi biết bé đang bị đau bụng sau khi uống sữa có dấu hiệu bất thường. Bạn nên ngừng cho bé sử dụng sản phẩm này và liên hệ cơ sở y tế để được tư vấn, kiểm tra sớm. Nếu bé có biểu hiện nghiêm trọng, hãy đưa bé đi cấp cứu ngay. Mình chưa thể xác định nguyên nhân đau bụng hoặc kết luận sản phẩm có vấn đề chỉ từ thông tin hiện tại.
