@@ -206,13 +206,11 @@ Ngoài bảng tool: AI **đọc** được đơn hàng và **bản chụp mô t�
   - hai bên đưa bằng chứng mâu thuẫn;
   - AI không chắc tiêu chí "đúng mô tả" (ví dụ KB3: "6 lít" là dung tích danh định hay lòng nồi);
   - đã xin bằng chứng 1 vòng mà vẫn thiếu;
-  - tin nhắn có lời doạ, từ bất kỳ bên nào. Nếu là **đe doạ an toàn** (như "tìm người đến đánh" ở KB4) thì chuyển **ngay, ưu tiên cao**, không chờ đủ bằng chứng;
-  - người mua nghi **hàng giả** hoặc đòi **khoá / phạt shop**;
-  - có **rủi ro sức khoẻ** (KB6: trẻ uống sữa vón cục, đang đau bụng). AI chuyển **ngay, ưu tiên cao**, và câu đầu tiên AI nói là khuyên đưa bé đi khám, không phải hướng dẫn chụp ảnh vỏ hộp;
-  - đơn **giá trị cao** (KB8: iPhone 30 triệu), để nhân viên đối soát cân nặng bưu kiện với đơn vị vận chuyển;
-  - yêu cầu **không có tool nào làm được** (KB7: xoá đánh giá 1 sao, hoàn phí ship). AI nói rõ mình không làm được việc đó, không hứa, rồi chuyển nhân viên.
-
-  Người mua cũng luôn có nút **"Gặp nhân viên"** để tự chuyển, không cần qua AI.
+  - tin nhắn có lời doạ từ bất kỳ bên nào;
+  - người mua nghi hàng giả hoặc đòi khoá / phạt shop;
+  - có rủi ro sức khoẻ;
+  - đơn giá trị cao (KB8: iPhone 30 triệu), để nhân viên đối soát cân nặng bưu kiện với đơn vị vận chuyển;
+  - yêu cầu không có tool nào làm được (KB7: xoá đánh giá 1 sao, hoàn phí ship).
 - **Ca nghi hàng giả, đòi phạt shop:** `phat_shop` bị cấm, nhưng AI cũng không được bỏ lơ yêu cầu này. AI chuyển hồ sơ cho trưởng nhóm, **gắn lý do "nghi hàng giả / yêu cầu xử phạt shop"**, để trưởng nhóm chuyển sang bộ phận chuyên trách (rubric riêng của track, ý 5). Việc chuyển này **không phạt ai**: shop không bị ảnh hưởng cho tới khi bộ phận chuyên trách tự kết luận. AI nói với người mua: *"Mình đã chuyển hồ sơ cho nhân viên, kèm ghi chú bạn nghi hàng giả, để chuyển tới bộ phận chuyên trách. Mình không thể hứa shop sẽ bị xử lý thế nào."* Khiếu nại hoàn tiền vẫn chạy song song.
 - **Đã cân nhắc và loại:** *Cần người duyệt*, loại vì lý do ở trên. Lo ngại "chuyển nhiều quá làm nghẽn hàng đợi" là có thật. Nhóm xử lý bằng danh sách trường hợp bắt buộc ở trên, không xử lý bằng cách hạ mức.
 
