@@ -183,12 +183,10 @@ Ngoài bảng tool: AI **đọc** được đơn hàng và **bản chụp mô t�
 
 Đây là tool cả nhóm lệch nhau nhiều nhất. Hoàn tiền sai thì người bán thua, nhưng từ chối sai thì người mua thua, và AI rất dễ lệch về một trong hai phía.
 
-> *Ghi lại đúng tên người chọn gì sau buổi bàn.*
-
 | Người | Đã chọn | Lý do | Cái giá của phía đó (trỏ về §2) |
 |---|---|---|---|
-| [Thành viên 1] | **Tự làm** khi bằng chứng cho thấy người bán đúng, hoặc người mua không gửi bằng chứng sau một thời hạn | Người bán đúng thì phải được trả tiền nhanh, không bị treo vì khách giận | **KB3:** AI thấy lòng nồi 5 lít khớp "dung tích danh định 6L" thì tự đóng. Nhưng nếu mô tả *lúc đặt* chỉ ghi "6 lít" thì người mua đúng, mất tiền và giữ nồi sai. **KB1:** người mua nhắn cụt rồi không trả lời (bận, không rành app), AI tự đóng vì "quá hạn". Im lặng bị coi là thua. **KB8:** AI thấy chỉ có ảnh tĩnh, không có video, coi là thiếu căn cứ rồi tự đóng. Nếu người mua thật sự nhận cục gạch (hàng bị tráo lúc vận chuyển), họ mất 30 triệu. |
-| [Thành viên 2] | **Cấm** AI đụng tới từ chối, kể cả soạn đề xuất | Từ chối người đang khiếu nại là việc nhạy cảm, để người làm | AI chỉ còn được soạn hoàn tiền, nên lệch hẳn về "hoàn cho xong". **KB3** khi người bán đúng: nhân viên chỉ nhận được đề xuất hoàn, người bán dễ bị xử thua. Đúng câu than của người bán trong track: *"Bên tôi đúng cũng chẳng ai nghe."* |
+| Trần Tùng Lâm | **Tự làm** khi bằng chứng cho thấy người bán đúng, hoặc người mua không gửi bằng chứng sau một thời hạn | Người bán đúng thì phải được trả tiền nhanh, không bị treo vì khách giận | **KB3:** AI thấy lòng nồi 5 lít khớp "dung tích danh định 6L" thì tự đóng. Nhưng nếu mô tả *lúc đặt* chỉ ghi "6 lít" thì người mua đúng, mất tiền và giữ nồi sai. **KB1:** người mua nhắn cụt rồi không trả lời (bận, không rành app), AI tự đóng vì "quá hạn". Im lặng bị coi là thua. **KB8:** AI thấy chỉ có ảnh tĩnh, không có video, coi là thiếu căn cứ rồi tự đóng. Nếu người mua thật sự nhận cục gạch (hàng bị tráo lúc vận chuyển), họ mất 30 triệu. |
+| Lê Hiền Hiếu | **Cấm** AI đụng tới từ chối, kể cả soạn đề xuất | Từ chối người đang khiếu nại là việc nhạy cảm, để người làm | AI chỉ còn được soạn hoàn tiền, nên lệch hẳn về "hoàn cho xong". **KB3** khi người bán đúng: nhân viên chỉ nhận được đề xuất hoàn, người bán dễ bị xử thua. Đúng câu than của người bán trong track: *"Bên tôi đúng cũng chẳng ai nghe."* |
 | [Thành viên 3] | **Cần nhân viên duyệt** | Tiền khó đảo, nhưng một người xem hồ sơ là chặn được | Người bán chờ tiền thêm tối đa 48 + 24 giờ, kể cả khi họ đúng. |
 
 **Nhóm chốt:** **cần người duyệt**, và **tách phần soạn ra** thành `de_xuat_tu_choi` (tự làm):
