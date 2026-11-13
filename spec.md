@@ -1,8 +1,3 @@
-# Dàn ý bài nộp *(spec.md — nộp trước 23:59 ngày lab của lớp)*
-
-> **Một quyết định = bốn ý:** đã cân nhắc phương án nào · chọn phương án nào · vì sao · loại các phương án kia vì sao. Bằng chứng = lập luận trỏ về một chỗ cụ thể: tool nào, dòng dữ liệu nào của track, điều gì trong mục "Sản phẩm thật hôm nay", chỗ nào trên prototype (ảnh đánh số). Không chạy agent.
-
-
 # Bài nộp LAB5 — T4 · Nhóm E-NiceBot
 
 ## Thành viên nhóm
@@ -13,7 +8,7 @@ Bài nộp cần **danh sách thành viên** và **mỗi người làm gì**. Nh
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-|Lê Hiền Hiếu  |2A202603940  | Ghi chép lại nội dung thảo luận §1. Tạo 10 kịch bản rủi ro và 2 kịch bản đắt nhất ở §2 |
+|Lê Hiền Hiếu  |2A202603940  | Ghi chép lại nội dung thảo luận §1. Tạo 10 kịch bản rủi ro và 2 kịch bản đắt nhất ở §2. Hỗ trợ làm §5 |
 | Trần Tùng Lâm | 2A202603893 | Xếp mức cho từng tool, thử mức trên 3 kịch bản và viết luật thêm |
 | Cao Phạm Tân Khải  | 2A202603883  | Khi AI sai với 2 kịch bản đắt nhất, chặng 6: các tiêu chí đánh giá Pass/Fail |
 
