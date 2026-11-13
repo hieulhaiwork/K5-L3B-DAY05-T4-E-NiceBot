@@ -13,17 +13,48 @@ Bài nộp cần **danh sách thành viên** và **mỗi người làm gì**. Nh
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-|Lê Hiền Hiếu  |2A201603940  | Tạo 8 kịch bản rủi ro và 2 kịch bản đắt nhất |
+|Lê Hiền Hiếu  |2A202603940  | Ghi chép lại nội dung thảo luận §1. Tạo 10 kịch bản rủi ro và 2 kịch bản đắt nhất ở §2 |
 |  |  |  |
 |  |  |  |
 
 ## §1. Lát cắt & phạm vi
 
 ### 1. Lát cắt của nhóm
-Trong Trò chuyện với Shopee, khi người mua báo rằng hàng nhận được không đúng mô tả, AI phải quyết định nên:
-- Hướng dẫn người mua gửi yêu cầu trả hàng/hoàn tiền.
-- Yêu cầu bổ sung bằng chứng.
-- Chuyển hồ sơ cho nhân viên xử lý.
+Trong mục "Trò chuyện với Shopee", khi người mua đang báo "hàng nhận không đúng mô tả", AI tự quyết định giữa việc hướng dẫn gửi yêu cầu trả hàng/hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên, nhằm giúp người mua biết đúng bước tiếp theo và đảm bảo người bán không bị xử thua oan khi họ đúng.
+
+### 2. Sản phẩm thật hôm nay
+- Trợ lý ảo vận hành theo menu có sẵn (cây kịch bản cứng), bắt buộc người mua phải chọn một đơn hàng thật trước khi đi tiếp
+- Quy trình trả hàng/hoàn tiền chuẩn gồm 3 bước thủ công: người mua tự chọn đơn → chọn lý do và tải lên bằng chứng → người bán vào phản hồi; Shopee chỉ can thiệp xem xét khi hai bên không thống nhất.
+- Thời hạn khiếu nại áp dụng theo chính sách chung của sàn (phần lớn đơn là 15 ngày).
+
+### 3. Sản phẩm khi tích hợp AI
+- Thay thế menu cứng bằng khả năng hiểu ngôn ngữ tự nhiên (kể cả tin nhắn cụt, viết tắt, cảm xúc giận dữ) để tự động điều phối quy trình.
+- Quyền mới được cấp cho AI: Tự động đọc nội dung khiếu nại, đối chiếu với mô tả sản phẩm tại thời điểm đặt hàng (tránh bẫy người bán sửa mô tả sau khi bán), chủ động gọi công cụ gửi biểu mẫu xin thêm bằng chứng (yeu_cau_bang_chung), đề xuất/soạn phương án hoàn tiền (soan_hoan_tien), đóng khiếu nại (tu_choi_khieu_nai), hoặc đẩy hồ sơ lên trưởng nhóm (chuyen_truong_nhom).
+
+### 4. Phân tích rủi ro: Ai chịu khi AI sai?
+- Nếu AI hoàn tiền sai (soan_hoan_tien vội vàng): Người bán mất cả tiền lẫn hàng, bị giảm điểm uy tín và mất niềm tin vào sự công bằng của sàn.
+- Nếu AI từ chối sai (tu_choi_khieu_nai) hoặc hỏi vòng vo: Người mua mất tiền, phải giữ món hàng lỗi/sai mô tả và ức chế vì phải gửi đi gửi lại bằng chứng mà không biết thiếu gì.
+- Hướng sai nào đắt hơn?
+    - Về mặt vận hành & tài chính: Các quyết định chốt dòng tiền (soan_hoan_tien, tu_choi_khieu_nai) hoặc xử phạt (phat_shop) có tính bất khả nghịch cao — tiền đã chuyển đi hoặc shop đã bị khóa thì cực kỳ khó thu hồi/khắc phục. Trong đó, hoàn tiền sai cho gian lận giá trị lớn hoặc khóa nhầm shop gây thiệt hại diện rộng và trực tiếp phá hủy sinh kế đối tác.
+    - Về mặt an toàn & niềm tin: Bỏ qua các ca vượt ngưỡng khiếu nại thông thường để chạy theo quy trình xin ảnh tự động sẽ gây hậu quả nghiêm trọng không thể đền bù bằng tiền.
+
+#### 5. Phạm vi: Ba thứ tính năng này KHÔNG làm
+- Không tự ý quyết định các chế tài/hành động ngoài thẩm quyền khiếu nại đơn hàng mà không có đủ bằng chứng và phải được bộ phận chuyên trách chấp thuận.
+- Không tiết lộ thông tin định danh cá nhân giữa hai bên: Tuyệt đối không cung cấp số điện thoại, địa chỉ riêng của người bán cho người mua (hoặc ngược lại) để hai bên tự giải quyết.
+- Không phán xử dựa trên cảm xúc hoặc dữ liệu từ một chiều.
+
+#### 6. Các tool
+Các nhóm tool được cung cấp:
+    - Nhóm chỉ đọc / tra cứu dữ liệu: Không có tool riêng trong bảng
+    - Nhóm thay đổi trạng thái giao tiếp & luồng xử lý (có thể kiểm soát): yeu_cau_bang_chung (gửi tin nhắn biểu mẫu — tin đã gửi đi không thu hồi được nhưng chưa làm mất tiền) và chuyen_truong_nhom (đẩy hồ sơ lên cấp trên — đảo lại được).
+    - Nhóm thay đổi tài chính & trạng thái tài khoản (Khó/Không thể đảo ngược):
+        - soan_hoan_tien: Tiền chuyển thẳng về người mua.
+        - tu_choi_khieu_nai: Đóng khiếu nại, tiền giải ngân về người bán.
+        - phat_shop: Trừ điểm uy tín, khóa gian hàng, ảnh hưởng toàn bộ hoạt động kinh doanh của shop.
+
+Xử lý khi người dùng đòi việc không có trong bảng tool:
+- Các yêu cầu ngoài bộ tool thường gặp: Đòi xóa đánh giá xấu, đòi số điện thoại/địa chỉ bên kia, đòi bồi thường tổn thất tinh thần/sức khỏe, đòi xử lý hình sự/đe dọa bạo lực, hoặc đòi hủy/đổi địa chỉ đơn hàng khác.
+- Cách AI phản hồi chuẩn: Từ chối thẳng thắn nhưng lịch sự về giới hạn quyền hạn của trợ lý ảo (không hứa hẹn những gì tool không làm được); giữ bảo mật thông tin tuyệt đối; hướng dẫn người dùng đúng kênh hoặc gọi chuyen_truong_nhom để nhân viên vận hành hỗ trợ tiếp.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
 
