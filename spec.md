@@ -163,20 +163,12 @@ Mình sẽ ưu tiên chuyển khiếu nại này cho bộ phận phụ trách xe
 
 ## §4. Mức tự chủ  (chặng 4)
 ### 4.0 Nguyên tắc chung nhóm dùng để xếp mức
-
-Track nói sai hướng nào cũng có **một bên** mất tiền. Vì vậy nhóm không xếp mức theo kiểu "an toàn cho sàn" mà theo một luật áp dụng như nhau cho cả hai bên:
-
-> **Việc làm mất tiền của một bên chỉ được chạy khi chính bên chịu thiệt bấm đồng ý, hoặc nhân viên sàn duyệt. AI không bao giờ là người bấm cuối.**
-
 - Người bán bấm "Đồng ý hoàn tiền" thì tiền về người mua (người bán là bên chịu thiệt, họ đã đồng ý).
 - Người mua bấm "Rút khiếu nại" thì khiếu nại đóng, tiền về người bán (người mua là bên chịu thiệt, họ đã đồng ý).
 - Hai bên không thống nhất thì **nhân viên** quyết.
-
-Luật này dùng cho cả hoàn tiền lẫn từ chối, nên AI không nghiêng về bên nào. Như bối cảnh track viết: "Từ chối cho chắc" cũng có người thua.
-
 ### 4.1 Bảng mức tự chủ
 
-Bảng gốc có 5 tool. Nhóm **tách 2 tool** thành hai bước "soạn" và "thực hiện" (lý do ở 4.4), **không thêm tool mới**. Tool có dấu ✚ là phần nhóm tách ra.
+Bảng gốc có 5 tool. Nhóm **tách 2 tool** thành hai bước "soạn" và "thực hiện" (lý do ở 4.4). Tool có dấu ✚ là phần nhóm tách ra.
 
 | Tool | Làm gì | Đảo lại được không | **Mức của nhóm** | Ai duyệt |
 |---|---|---|---|---|
@@ -247,7 +239,6 @@ Ngoài bảng tool: AI **đọc** được đơn hàng và **bản chụp mô t�
   - Nhân viên có **24 giờ**. Quá hạn thì tự chuyển trưởng nhóm. **Không bao giờ** tự chạy vì quá hạn.
   - Người mua luôn thấy "đang chờ ai, tới khi nào".
 - **Đã cân nhắc và loại:**
-  - *Tự làm khi ca rõ*, loại vì "rõ" là AI tự đánh giá. KB3 trông rõ ("ghi 6 lít, đo 5 lít") nhưng "6 lít" có thể là dung tích danh định, tức người bán đúng. KB8 cũng trông rõ (có ảnh cục gạch trong hộp), nhưng một tấm ảnh tĩnh thì ai cũng dựng được, và sai một lần là người bán mất 30 triệu.
   - *Tự làm khi số tiền nhỏ*, loại vì ngưỡng "nhỏ" nào cũng bị lợi dụng bằng cách khiếu nại nhiều đơn nhỏ, và với shop nhỏ thì một đơn nhỏ cũng là tiền thật. Đường nhanh "người bán bấm đồng ý" đã đủ nhanh cho ca rõ.
   - *Người bán im lặng 48 giờ thì coi như đồng ý, tự hoàn*, loại vì im lặng không phải bằng chứng, mà tiền đi thì không đảo lại được. Cái giá là người mua chờ thêm tối đa 24 giờ.
   - *Cấm*, loại vì như vậy ca shop đã nhận lỗi (KB2) cũng phải chờ nhân viên, quay lại đúng nỗi khổ của menu cứng hôm nay.
@@ -284,7 +275,7 @@ Ngoài bảng tool: AI **đọc** được đơn hàng và **bản chụp mô t�
 |---|---|---|---|
 | Trần Tùng Lâm | **Tự làm** khi bằng chứng cho thấy người bán đúng, hoặc người mua không gửi bằng chứng sau một thời hạn | Người bán đúng thì phải được trả tiền nhanh, không bị treo vì khách giận | **KB3:** AI thấy lòng nồi 5 lít khớp "dung tích danh định 6L" thì tự đóng. Nhưng nếu mô tả *lúc đặt* chỉ ghi "6 lít" thì người mua đúng, mất tiền và giữ nồi sai. **KB1:** người mua nhắn cụt rồi không trả lời (bận, không rành app), AI tự đóng vì "quá hạn". Im lặng bị coi là thua. **KB8:** AI thấy chỉ có ảnh tĩnh, không có video, coi là thiếu căn cứ rồi tự đóng. Nếu người mua thật sự nhận cục gạch (hàng bị tráo lúc vận chuyển), họ mất 30 triệu. |
 | Lê Hiền Hiếu | **Cấm** AI đụng tới từ chối, kể cả soạn đề xuất | Từ chối người đang khiếu nại là việc nhạy cảm, để người làm | AI chỉ còn được soạn hoàn tiền, nên lệch hẳn về "hoàn cho xong". **KB3** khi người bán đúng: nhân viên chỉ nhận được đề xuất hoàn, người bán dễ bị xử thua. Đúng câu than của người bán trong track: *"Bên tôi đúng cũng chẳng ai nghe."* |
-| [Thành viên 3] | **Cần nhân viên duyệt** | Tiền khó đảo, nhưng một người xem hồ sơ là chặn được | Người bán chờ tiền thêm tối đa 48 + 24 giờ, kể cả khi họ đúng. |
+| Cao Phạm Tân Khải | **Cần nhân viên duyệt** | Tiền khó đảo, nhưng một người xem hồ sơ là chặn được | Người bán chờ tiền thêm tối đa 48 + 24 giờ, kể cả khi họ đúng. |
 
 **Nhóm chốt:** **cần người duyệt**, và **tách phần soạn ra** thành `de_xuat_tu_choi` (tự làm):
 
