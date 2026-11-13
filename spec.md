@@ -8,7 +8,7 @@ Bài nộp cần **danh sách thành viên** và **mỗi người làm gì**. Nh
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-|Lê Hiền Hiếu  |2A202603940  | Ghi chép lại nội dung thảo luận §1. Tạo 10 kịch bản rủi ro và 2 kịch bản đắt nhất ở §2. Hỗ trợ làm §5 |
+|Lê Hiền Hiếu  |2A202603940  | Ghi chép lại nội dung thảo luận §1. Tạo 8 kịch bản rủi ro và 2 kịch bản đắt nhất ở §2. Hỗ trợ làm §5 |
 | Trần Tùng Lâm | 2A202603893 | Xếp mức cho từng tool, thử mức trên 3 kịch bản và viết luật thêm |
 | Cao Phạm Tân Khải  | 2A202603883  | Khi AI sai với 2 kịch bản đắt nhất, chặng 6: các tiêu chí đánh giá Pass/Fail |
 
