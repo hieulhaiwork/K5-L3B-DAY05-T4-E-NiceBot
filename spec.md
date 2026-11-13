@@ -15,7 +15,7 @@ Bài nộp cần **danh sách thành viên** và **mỗi người làm gì**. Nh
 |---|---|---|
 |Lê Hiền Hiếu  |2A201603940  | Tạo 8 kịch bản rủi ro và 2 kịch bản đắt nhất |
 | Trần Tùng Lâm | 2A202603893 | Xếp mức cho từng tool, thử mức trên 3 kịch bản và viết luật thêm |
-|  |  |  |
+| Cao Phạm Tân Khải  | 2A202603883  | Khi AI sai với 2 kịch bản đắt nhất |
 
 ## §1. Lát cắt & phạm vi
 
